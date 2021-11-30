@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">  
+    <meta http-equiv="X-UA-Compatible" content="IE-edge">
+    <meta name="viewport" content="width=device-width initial-scale=1.0">
+    <title>APIendereços</title>
+    <link
+          rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
+          integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l"
+          crossorigin="anonymous"
+    >
+</head>
+
+<body>
+    <!-- NAVBAR -->
+    <div class="container-fluid m-0 p-0">
+      <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <a class="navbar-brand font-weight-bold" href="inicio.html">API<span class="text-warning">endereços</span></a>
+        <button
+              class="navbar-toggler"
+              type="button"
+              data-toggle="collapse"
+              data-target="#navbarNav"
+              aria-controls="navbarNav"
+              aria-expanded="false"
+              aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              <a class="nav-link" href="inicio.html">Inicio</a>
+            </li>
+            <li class="nav-item active">
+              <a class="nav-link" href="endereco.html">Endereços</a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+    </div>
+    <!-- MODAL -->
+    <div
+          class="modal fade"
+          id="exampleModalCenter"
+          data-backdrop="static"
+          data-keyboard="false"
+          tabindex="-1"
+          role="dialog"
+          aria-labelledby="exampleModalCenterTitle"
+          aria-hidden="true"
+    >
+      <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLongTitle">Novo Endereço</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body" >
+            <div class="container-fluid"> 
+              <form class="needs-validation" id="forminho" novalidate>
+                <div class="row">
+                  <div class="col-4 mb-3">
+                    <label for="cep">CEP</label>
+                    <input type="text" class="form-control" id="cep" name="cep" required>
+                    <div class="valid-feedback">
+                      Correto.
+                    </div>
+                    <div class="invalid-feedback">
+                      Campo obrigatório.
+                    </div>
+                  </div>
+                  <div class="col-8 mb-3">
+                    <label for="logradouro">Logradouro</label>
+                    <input type="text" class="form-control" id="logradouro" name="logradouro" required>
+                    <div class="valid-feedback">
+                      Correto.
+                    </div>
+                    <div class="invalid-feedback">
+                      Campo obrigatório.
+                    </div>
+                  </div>
+                  <div class="col-6 mb-3">
+                    <label for="bairro">Bairro</label>
+                    <input type="text" class="form-control" id="bairro" name="bairro" required>
+                    <div class="valid-feedback">
+                      Correto.
+                    </div>
+                    <div class="invalid-feedback">
+                      Campo obrigatório.
+                    </div>
+                  </div>  
+                  <div class="col-6 mb-3">
+                    <label for="cidade">Cidade</label>
+                    <input type="text" class="form-control" id="cidade" name="cidade" required>
+                    <div class="valid-feedback">
+                      Correto.
+                    </div>
+                    <div class="invalid-feedback">
+                      Campo obrigatório.
+                    </div>
+                  </div>
+                  <div class="col-4 mb-3">
+                    <label for="estado">Estado</label>
+                    <input type="text" class="form-control" id="estado" name="estado" required>
+                    <div class="valid-feedback">
+                      Correto.
+                    </div>
+                    <div class="invalid-feedback">
+                      Campo obrigatório.
+                    </div>
+                  </div>
+                </div>             
+              </form>
+            </div> 
+          </div>
+          <div class="modal-footer">
+            <button type="submit" class="btn btn-success" form="forminho" id="liveToastBtn">Salvar</button>
+            <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+      <div class="position-fixed top-0 right-0" style="z-index: 5; right: 0; top: 0;">
+        <div id="liveToast" class="toast hide" role="alert" aria-live="assertive" aria-atomic="true" data-delay="30000">
+          <div class="toast-body bg-success text-white">
+            <div class="row">
+              <div class="col-10">
+                Endereço salvo com sucesso!
+              </div>
+              <div class="col-2">
+                <button type="button" class="bg-transparent border-0" data-dismiss="toast" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    <!-- LISTA -->
+    <div class="row m-5">
+      <div class="card shadow w-100">
+        <div class="card-header">
+          <div class="row">
+            <div class="col">
+              <h2 class="mb-0">Endereços</h2>
+            </div>
+            <div class="col d-flex justify-content-end align-items-center">
+              <button type="button" class="btn btn-success" data-toggle="modal" data-target="#exampleModalCenter">
+                Novo Endereço
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="card-body p-0">
+          <div class="table-responsive">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th scope="col">#</th>
+                  <th scope="col">Logradouro</th>
+                  <th scope="col">Bairro</th>
+                  <th scope="col">Cidade</th>
+                  <th scope="col">Estado</th>
+                  <th scope="col">CEP</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th scope="row">1</th>
+                  <td>Alameda Augusto Stellfeid</td>
+                  <td>Bigorrilho</td>
+                  <td>Curitiba</td>
+                  <td>Parana</td>
+                  <td>80730150</td>
+                </tr>
+                <tr>
+                  <th scope="row">1</th>
+                  <td>Alameda Augusto Stellfeid</td>
+                  <td>Bigorrilho</td>
+                  <td>Curitiba</td>
+                  <td>Parana</td>
+                  <td>80730150</td>
+                </tr>
+                <tr>
+                  <th scope="row">1</th>
+                  <td>Alameda Augusto Stellfeid</td>
+                  <td>Bigorrilho</td>
+                  <td>Curitiba</td>
+                  <td>Parana</td>
+                  <td>80730150</td>
+                </tr>
+                <tr>
+                  <th scope="row">1</th>
+                  <td>Alameda Augusto Stellfeid</td>
+                  <td>Bigorrilho</td>
+                  <td>Curitiba</td>
+                  <td>Parana</td>
+                  <td>80730150</td>
+                </tr>
+                <tr>
+                  <th scope="row">1</th>
+                  <td>Alameda Augusto Stellfeid</td>
+                  <td>Bigorrilho</td>
+                  <td>Curitiba</td>
+                  <td>Parana</td>
+                  <td>80730150</td>
+                </tr>
+                <tr>
+                  <th scope="row">1</th>
+                  <td>Alameda Augusto Stellfeid</td>
+                  <td>Bigorrilho</td>
+                  <td>Curitiba</td>
+                  <td>Parana</td>
+                  <td>80730150</td>
+                </tr>
+                <tr>
+                  <th scope="row">1</th>
+                  <td>Alameda Augusto Stellfeid</td>
+                  <td>Bigorrilho</td>
+                  <td>Curitiba</td>
+                  <td>Parana</td>
+                  <td>80730150</td>
+                </tr>
+                <tr>
+                  <th scope="row">1</th>
+                  <td>Alameda Augusto Stellfeid</td>
+                  <td>Bigorrilho</td>
+                  <td>Curitiba</td>
+                  <td>Parana</td>
+                  <td>80730150</td>
+                </tr>
+                <tr>
+                  <th scope="row">1</th>
+                  <td>Alameda Augusto Stellfeid</td>
+                  <td>Bigorrilho</td>
+                  <td>Curitiba</td>
+                  <td>Parana</td>
+                  <td>80730150</td>
+                </tr>
+                <tr>
+                  <th scope="row">1</th>
+                  <td>Alameda Augusto Stellfeid</td>
+                  <td>Bigorrilho</td>
+                  <td>Curitiba</td>
+                  <td>Parana</td>
+                  <td>80730150</td>
+                </tr>
+                <tr>
+                  <th scope="row">1</th>
+                  <td>Alameda Augusto Stellfeid</td>
+                  <td>Bigorrilho</td>
+                  <td>Curitiba</td>
+                  <td>Parana</td>
+                  <td>80730150</td>
+                </tr>
+                <tr>
+                  <th scope="row">1</th>
+                  <td>Alameda Augusto Stellfeid</td>
+                  <td>Bigorrilho</td>
+                  <td>Curitiba</td>
+                  <td>Parana</td>
+                  <td>80730150</td>
+                </tr>
+                <tr>
+                  <th scope="row">1</th>
+                  <td>Alameda Augusto Stellfeid</td>
+                  <td>Bigorrilho</td>
+                  <td>Curitiba</td>
+                  <td>Parana</td>
+                  <td>80730150</td>
+                </tr>
+                <tr>
+                  <th scope="row">1</th>
+                  <td>Alameda Augusto Stellfeid</td>
+                  <td>Bigorrilho</td>
+                  <td>Curitiba</td>
+                  <td>Parana</td>
+                  <td>80730150</td>
+                </tr>
+                <tr>
+                  <th scope="row">1</th>
+                  <td>Alameda Augusto Stellfeid</td>
+                  <td>Bigorrilho</td>
+                  <td>Curitiba</td>
+                  <td>Parana</td>
+                  <td>80730150</td>
+                </tr>
+              </tbody>       
+            </table>
+          </div>
+        </div>  
+      </div> 
+    </div>   
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous"></script>
+    <script type="text/javascript"> 
+      $(document).ready(function(){
+        // $("#liveToastBtn").click(function(){
+        //   $('.toast').toast('show');
+        // });
+      });
+    </script>
+    <script>
+      // Example starter JavaScript for disabling form submissions if there are invalid fields
+      (function() {
+        'use strict';
+        window.addEventListener('load', function() {
+          // Fetch all the forms we want to apply custom Bootstrap validation styles to
+          var forms = document.getElementsByClassName('needs-validation');
+          // Loop over them and prevent submission
+          var validation = Array.prototype.filter.call(forms, function(form) {
+            form.addEventListener('submit', function(event) {
+              if (form.checkValidity() === false) {
+                 event.preventDefault();
+                 event.stopPropagation();
+              } else {
+                $("#exampleModalCenter").modal('hide');
+                $('.toast').toast('show');
+              }
+              form.classList.add('was-validated');
+              event.preventDefault();
+            }, false);
+          });
+        }, false);
+      })();
+    </script>
+
+</body>
+</html>  
